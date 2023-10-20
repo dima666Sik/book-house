@@ -1,0 +1,31 @@
+@startuml
+'https://plantuml.com/use-case-diagram
+
+left to right direction
+actor User
+actor Guest
+actor Admin
+
+package Core{
+    (Check products) as (CP)
+    (Order products) as (OP)
+}
+
+package Auth{
+    (Authorization) as (Author)
+    (Registration) as (Reg)
+}
+
+User -> (CP)
+User -> (OP)
+User --> (Reg)
+User -> (Author)
+
+Guest ---> (CP)
+Guest --> (Reg)
+Guest --> (Author)
+
+Admin ----> (CP)
+Admin ---> (Reg)
+Admin ---> (Author)
+@enduml

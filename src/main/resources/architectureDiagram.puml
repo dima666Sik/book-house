@@ -1,0 +1,73 @@
+@startuml
+skinparam linetype ortho
+
+rectangle "web-browser" {
+    [Client Application]
+}
+
+rectangle "auth" {
+    [Controller] as AuthControllerRec
+    [Service] as AuthServiceRec
+    [Repository] as AuthRepositoryRec
+}
+
+rectangle "AuthControllerRec" {
+  [AuthController] <<Controller>>
+  [Client Application] ..> [AuthControllerRec] : API calls (HTTP/JSON)
+}
+
+rectangle "AuthServiceRec" {
+    [AuthService] <<Interface Service>>
+    [AuthServiceImpl] <<Service>>
+
+  [AuthService] <--* [AuthController]
+  [AuthServiceImpl] ..|> [AuthService]
+}
+
+rectangle "AuthRepositoryRec" {
+    [AccountRepository] <<Interface Repository>>
+    [AccountRepositoryImpl] <<Repository>>
+
+  [AccountRepository] <--* [AuthServiceImpl]
+  [AccountRepositoryImpl] ..|> [AccountRepository]
+}
+
+database "H2" {
+  frame "db:book-house" {
+    [User] <<Table>>
+    [Admin] <<Table>>
+  }
+}
+
+[AccountRepositoryImpl] --> [db:book-house] #Blue
+
+rectangle "core" {
+    [Controller] as CoreControllerRec
+    [Service] as CoreServiceRec
+    [Repository] as CoreRepositoryRec
+}
+
+rectangle "CoreControllerRec" {
+  [OrderController] <<Controller>>
+  [Client Application] ..> [CoreControllerRec] : API calls (HTTP/JSON)
+}
+
+rectangle "CoreServiceRec" {
+    [OrderService] <<Interface Service>>
+    [OrderServiceImpl] <<Service>>
+
+  [OrderService] <--* [OrderController]
+  [OrderServiceImpl] ..|> [OrderService]
+}
+
+rectangle "CoreRepositoryRec" {
+    [ProductRepository] <<Interface Repository>>
+    [ProductRepositoryImpl] <<Repository>>
+
+  [ProductRepository] <--* [OrderServiceImpl]
+  [ProductRepositoryImpl] ..|> [ProductRepository]
+}
+
+[ProductRepositoryImpl] --> [db:book-house] #Blue
+
+@enduml
