@@ -13,7 +13,6 @@ import ua.house.book.auth.service.AuthServiceImplTest;
 import java.util.Set;
 
 @Configuration
-@ComponentScan("ua.house.book.auth")
 public class AuthTestConfig {
     @Bean
     public AccountDAOImplTest accountRepositoryImplTest() {
