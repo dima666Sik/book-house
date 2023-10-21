@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="d3f4face-9403-4e8a-b838-d91dbadf4aef" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ua/house/book/auth/cofig/AuthConfig.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ua/house/book/auth/cofig/HibernateConfig.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ua/house/book/auth/controller/AuthController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ua/house/book/auth/dao/AccountDAO.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ua/house/book/auth/dao/AccountDAOImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ua/house/book/auth/dao/hql/AccountHQL.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ua/house/book/auth/domain/Role.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ua/house/book/auth/domain/dto/request/AccountDTORequest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ua/house/book/auth/domain/dto/response/AccountDTOResponse.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ua/house/book/auth/domain/entity/Account.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ua/house/book/auth/domain/entity/Admin.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ua/house/book/auth/domain/entity/User.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ua/house/book/auth/exception/RepositoryException.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ua/house/book/auth/service/AuthService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ua/house/book/auth/service/AuthServiceImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ua/house/book/core/domain/entity/Book.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ua/house/book/core/domain/entity/Order.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ua/house/book/core/domain/entity/Product.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/architectureDiagram.puml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/diagramEntities.puml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/useCaseDiagramActorsAndActs.puml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/ua/house/book/auth/cofig/AuthTestConfig.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/ua/house/book/auth/dao/AccountDAOImplTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/ua/house/book/auth/service/AuthServiceImplTest.java" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 5
+}]]></component>
+  <component name="ProjectId" id="2X4oHqmfgFtmMto0cK7MgzKahme" />
+  <component name="ProjectViewState">
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "D:/GitProjects/book-house/book-house-server",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="d3f4face-9403-4e8a-b838-d91dbadf4aef" name="Changes" comment="" />
+      <created>1697897627929</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1697897627929</updated>
+      <workItem from="1697897629181" duration="35000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>
