@@ -1,4 +1,4 @@
-package ua.house.book.auth.repository.hql;
+package ua.house.book.auth.dao.hql;
 
 import ua.house.book.auth.domain.entity.Account;
 

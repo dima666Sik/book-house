@@ -1,12 +1,10 @@
-package ua.house.book.auth.repository;
+package ua.house.book.auth.dao;
 
 import ua.house.book.auth.domain.entity.Account;
-import ua.house.book.auth.domain.entity.Admin;
 
 import java.util.Optional;
 
-public interface AccountRepository {
+public interface AccountDAO {
     void createAccount(final Account account);
-
     Optional<Account> findAccountByEmailAndPassword(String email, String password, Class<? extends Account> clazz);
 }

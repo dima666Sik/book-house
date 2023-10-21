@@ -1,4 +1,4 @@
-package ua.house.book.auth.repository;
+package ua.house.book.auth.dao;
 
 import lombok.AllArgsConstructor;
 import org.hibernate.Session;
@@ -6,14 +6,14 @@ import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import ua.house.book.auth.domain.entity.Account;
-import ua.house.book.auth.repository.hql.AccountHQL;
+import ua.house.book.auth.dao.hql.AccountHQL;
 
 import java.util.Optional;
 
 @AllArgsConstructor
 @Repository
 @Transactional(readOnly = true)
-public class AccountRepositoryImpl implements AccountRepository {
+public class AccountDAOImpl implements AccountDAO {
     private final SessionFactory sessionFactory;
 
     private Session currentSession() {

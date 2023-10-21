@@ -1,6 +1,5 @@
 package ua.house.book.auth.cofig;
 
-import org.mockito.Mockito;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -8,9 +7,7 @@ import ua.house.book.auth.domain.Role;
 import ua.house.book.auth.domain.entity.Account;
 import ua.house.book.auth.domain.entity.Admin;
 import ua.house.book.auth.domain.entity.User;
-import ua.house.book.auth.repository.AccountRepository;
-import ua.house.book.auth.repository.AccountRepositoryImplTest;
-import ua.house.book.auth.service.AuthService;
+import ua.house.book.auth.dao.AccountDAOImplTest;
 import ua.house.book.auth.service.AuthServiceImplTest;
 
 import java.util.Set;
@@ -19,8 +16,8 @@ import java.util.Set;
 @ComponentScan("ua.house.book.auth")
 public class AuthTestConfig {
     @Bean
-    public AccountRepositoryImplTest accountRepositoryImplTest() {
-        return new AccountRepositoryImplTest();
+    public AccountDAOImplTest accountRepositoryImplTest() {
+        return new AccountDAOImplTest();
     }
 
     @Bean
