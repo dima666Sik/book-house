@@ -17,8 +17,8 @@ import java.util.Properties;
 @AllArgsConstructor
 @Configuration
 @EnableTransactionManagement
-@PropertySource("classpath:/hibernate-mysql.properties")
-public class HibernateConfig {
+@PropertySource("classpath:/hibernate-h2.properties")
+public class TestHibernateConfig {
     private final Environment env;
 
     @Bean
@@ -33,8 +33,8 @@ public class HibernateConfig {
     @Bean
     public DataSource dataSource() {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
-        dataSource.setDriverClassName(env.getProperty("hibernate.driver_class", "com.mysql.cj.jdbc.Driver"));
-        dataSource.setUrl(env.getProperty("hibernate.connection.url", "jdbc:mysql://localhost:3306/book_house"));
+        dataSource.setDriverClassName(env.getProperty("hibernate.driver_class", "org.h2.Driver"));
+        dataSource.setUrl(env.getProperty("hibernate.connection.url", "jdbc:h2:~./db/book-house;DB_CLOSE_ON_EXIT=FALSE;AUTO_SERVER=TRUE"));
         dataSource.setUsername(env.getProperty("hibernate.connection.username", ""));
         dataSource.setPassword(env.getProperty("hibernate.connection.password", ""));
         return dataSource;
@@ -51,7 +51,7 @@ public class HibernateConfig {
         Properties hibernateProperties = new Properties();
         hibernateProperties.setProperty("hibernate.show_sql", "true");
         hibernateProperties.setProperty("hibernate.hbm2ddl.auto", "update");
-        hibernateProperties.setProperty("hibernate.dialect", "org.hibernate.dialect.MySQLDialect");
+        hibernateProperties.setProperty("hibernate.dialect", "org.hibernate.dialect.H2Dialect");
         return hibernateProperties;
     }
 }
