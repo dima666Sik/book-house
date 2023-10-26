@@ -2,15 +2,20 @@ package ua.house.book.auth.service;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import ua.house.book.auth.cofig.AuthConfig;
-import ua.house.book.auth.cofig.HibernateConfig;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
+import ua.house.book.auth.config.AuthConfig;
+import ua.house.book.auth.config.HibernateConfig;
+import ua.house.book.auth.config.TestAuthConfig;
 import ua.house.book.auth.domain.entity.Account;
 import ua.house.book.auth.domain.entity.Admin;
 import ua.house.book.auth.domain.entity.User;
@@ -19,23 +24,20 @@ import ua.house.book.auth.dao.AccountDAO;
 import java.util.Optional;
 
 @ExtendWith(MockitoExtension.class)
+@ExtendWith(SpringExtension.class)
+@ContextConfiguration(classes = {HibernateConfig.class, TestAuthConfig.class})
 public class AuthServiceImplTest {
     @InjectMocks
     private AuthServiceImpl authService;
     @Mock
     private AccountDAO accountDAO;
-    private static Account userAccount;
-    private static Account adminAccount;
-
-    @BeforeAll
-    public static void init() {
-        AnnotationConfigApplicationContext annotationConfigApplicationContext = new AnnotationConfigApplicationContext(AuthConfig.class, HibernateConfig.class);
-
-        userAccount = annotationConfigApplicationContext.getBean("userAccount", Account.class);
-        adminAccount = annotationConfigApplicationContext.getBean("adminAccount", Account.class);
-    }
+    @Autowired
+    private Account userAccount;
+    @Autowired
+    private Account adminAccount;
 
     @Test
+    @Order(1)
     void registrationUserShouldBeSuccessful() {
         Mockito.doNothing().when(accountDAO).createAccount(Mockito.any());
         authService.registration(userAccount);
@@ -43,6 +45,7 @@ public class AuthServiceImplTest {
     }
 
     @Test
+    @Order(2)
     void authorizationUserShouldReturnAccount() {
         Mockito.when(accountDAO.
                         findAccountByEmailAndPassword(userAccount.getEmail(),
@@ -53,6 +56,7 @@ public class AuthServiceImplTest {
     }
 
     @Test
+    @Order(3)
     void registrationAdminShouldBeSuccessful() {
         Mockito.doNothing().when(accountDAO).createAccount(Mockito.any());
         authService.registration(adminAccount);
@@ -60,6 +64,7 @@ public class AuthServiceImplTest {
     }
 
     @Test
+    @Order(4)
     void authorizationAdminShouldReturnAccount() {
         Mockito.when(accountDAO.
                         findAccountByEmailAndPassword(adminAccount.getEmail(),

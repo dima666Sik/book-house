@@ -13,6 +13,7 @@ import java.util.Optional;
 @Transactional(readOnly = true)
 public class AuthServiceImpl implements AuthService {
     private final AccountDAO accountDAO;
+
     @Override
     @Transactional
     public boolean registration(Account account) {
@@ -22,6 +23,7 @@ public class AuthServiceImpl implements AuthService {
 
     @Override
     public Optional<Account> authorization(String email, String password, Class<? extends Account> clazz) {
+        System.out.println("service:" + email + " " + password + " " + clazz);
         return accountDAO.findAccountByEmailAndPassword(email, password, clazz);
     }
 }
