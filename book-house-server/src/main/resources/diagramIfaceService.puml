@@ -1,0 +1,27 @@
+@startuml
+skinparam linetype ortho
+
+rectangle "auth" {
+    [Service] as AuthServiceRec
+}
+
+rectangle "AuthServiceRec" {
+    [AuthService] <<Interface Service>>
+    [AuthServiceImpl] <<Service>>
+
+  [AuthServiceImpl] ..|> [AuthService]
+}
+
+rectangle "core" {
+    [Service] as CoreServiceRec
+}
+
+rectangle "CoreServiceRec" {
+    [OrderService] <<Interface Service>>
+    [OrderServiceImpl] <<Service>>
+
+  [OrderServiceImpl] ..|> [OrderService]
+}
+
+
+@enduml
