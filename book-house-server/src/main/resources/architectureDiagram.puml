@@ -33,7 +33,7 @@ rectangle "AuthRepositoryRec" {
   [AccountRepositoryImpl] ..|> [AccountRepository]
 }
 
-database "H2" {
+database "MySql" {
   frame "db:book-house" {
     [User] <<Table>>
     [Admin] <<Table>>

@@ -18,12 +18,10 @@ package Auth{
 
 User -> (CP)
 User -> (OP)
-User --> (Reg)
 User -> (Author)
 
 Guest ---> (CP)
 Guest --> (Reg)
-Guest --> (Author)
 
 Admin ----> (CP)
 Admin ---> (Reg)
