@@ -3,6 +3,10 @@ target/
 !**/src/main/**/target/
 !**/src/test/**/target/
 target
+out
+src/main/resources/hibernate-mysql.properties
+src/test/resources/hibernate-h2.properties
+
 
 ### IntelliJ IDEA ###
 .idea/

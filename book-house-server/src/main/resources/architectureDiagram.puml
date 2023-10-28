@@ -14,6 +14,7 @@ rectangle "auth" {
 rectangle "AuthControllerRec" {
   [AuthController] <<Controller>>
   [Client Application] ..> [AuthControllerRec] : API calls (HTTP/JSON)
+
 }
 
 rectangle "AuthServiceRec" {

@@ -1,53 +1,48 @@
 package ua.house.book.auth.dao;
 
+import org.hibernate.annotations.processing.SQL;
 import org.junit.jupiter.api.*;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import ua.house.book.auth.cofig.AuthConfig;
-import ua.house.book.auth.cofig.HibernateConfig;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mockito;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.jdbc.Sql;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
+import ua.house.book.auth.config.TestHibernateConfig;
+import ua.house.book.auth.config.TestAuthConfig;
 import ua.house.book.auth.domain.entity.Account;
 import ua.house.book.auth.domain.entity.Admin;
 import ua.house.book.auth.domain.entity.User;
 
-public class AccountDAOImplTest {
-    private static AccountDAO accountDAO;
-    private static Account userAccount;
-    private static Account adminAccount;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
-    @BeforeAll
-    public static void init() {
-        AnnotationConfigApplicationContext annotationConfigApplicationContext = new AnnotationConfigApplicationContext(AuthConfig.class, HibernateConfig.class);
-        accountDAO = annotationConfigApplicationContext.getBean("accountDAOImpl", AccountDAO.class);
-        userAccount = annotationConfigApplicationContext.getBean("userAccount", Account.class);
-        adminAccount = annotationConfigApplicationContext.getBean("adminAccount", Account.class);
-    }
+@ExtendWith(SpringExtension.class)
+@ContextConfiguration(classes = {TestHibernateConfig.class, TestAuthConfig.class})
+@Sql(value = {"/drop-test-users-before.sql"}, executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
+public class AccountDAOImplTest {
+    @Autowired
+    private AccountDAO accountDAO;
+    @Autowired
+    private Account userAccount;
+    @Autowired
+    private Account adminAccount;
 
     @Test
-    @Disabled
     @Order(1)
     void createUserShouldReturnTrue() {
         accountDAO.createAccount(userAccount);
-    }
-
-    @Test
-    @Disabled
-    @Order(2)
-    void createAdminShouldReturnTrue() {
-        accountDAO.createAccount(adminAccount);
-    }
-
-    @Test
-    @Order(3)
-    void findUserAccountByEmailAndPasswordShouldReturnAccount() {
-        Account foundAccount = accountDAO.findAccountByEmailAndPassword(userAccount.getEmail(), userAccount.getPassword(), User.class)
+        Account foundAccount = accountDAO.findAccountByEmailAndPassword(userAccount.getEmail(), userAccount.getPassword())
                 .orElseThrow(() -> new IllegalArgumentException("Not found account with this args: "
                         + userAccount.getEmail() + " " + userAccount.getPassword()));
+        System.out.println(foundAccount);
         Assertions.assertEquals(userAccount, foundAccount);
     }
 
     @Test
-    @Order(4)
-    void findAdminAccountByEmailAndPasswordShouldReturnAccount() {
-        Account foundAccount = accountDAO.findAccountByEmailAndPassword(adminAccount.getEmail(), adminAccount.getPassword(), Admin.class)
+    @Order(2)
+    void createAdminShouldReturnTrue() {
+        accountDAO.createAccount(adminAccount);
+        Account foundAccount = accountDAO.findAccountByEmailAndPassword(adminAccount.getEmail(), adminAccount.getPassword())
                 .orElseThrow(() -> new IllegalArgumentException("Not found account with this args: "
                         + adminAccount.getEmail() + " " + adminAccount.getPassword()));
         Assertions.assertEquals(adminAccount, foundAccount);

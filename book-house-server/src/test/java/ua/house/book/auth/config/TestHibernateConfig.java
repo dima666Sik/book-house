@@ -1,17 +1,14 @@
-package ua.house.book.auth.cofig;
+package ua.house.book.auth.config;
 
 import lombok.AllArgsConstructor;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
+import org.springframework.test.context.TestPropertySource;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
@@ -21,8 +18,8 @@ import java.util.Properties;
 @AllArgsConstructor
 @Configuration
 @EnableTransactionManagement
-@PropertySource("classpath:/hibernate.properties")
-public class HibernateConfig {
+@TestPropertySource("classpath:/hibernate-h2.properties")
+public class TestHibernateConfig {
     private final Environment env;
 
     @Bean
@@ -46,8 +43,7 @@ public class HibernateConfig {
 
     @Bean
     public PlatformTransactionManager hibernateTransactionManager() {
-        HibernateTransactionManager transactionManager
-                = new HibernateTransactionManager();
+        HibernateTransactionManager transactionManager = new HibernateTransactionManager();
         transactionManager.setSessionFactory(sessionFactory().getObject());
         return transactionManager;
     }
