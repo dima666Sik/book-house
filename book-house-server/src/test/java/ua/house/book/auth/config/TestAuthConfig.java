@@ -3,9 +3,9 @@ package ua.house.book.auth.config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
-import org.springframework.web.servlet.DispatcherServlet;
 import ua.house.book.auth.domain.Role;
+import ua.house.book.auth.domain.dto.request.AuthorizationDTO;
+import ua.house.book.auth.domain.dto.request.RegistrationDTO;
 import ua.house.book.auth.domain.entity.Account;
 import ua.house.book.auth.domain.entity.Admin;
 import ua.house.book.auth.domain.entity.User;
@@ -47,6 +47,42 @@ public class TestAuthConfig {
                 .password("admin")
                 .username("admin")
                 .roleSet(Set.of(Role.USER, Role.ADMIN))
+                .build();
+    }
+
+    @Bean
+    public RegistrationDTO userAccountRegistrationDtoRequest() {
+        return RegistrationDTO.builder()
+                .email("dimon@gmail.com")
+                .password("qwerty")
+                .username("dimas")
+                .build();
+    }
+
+    @Bean
+    public RegistrationDTO adminAccountRegistrationDtoRequest() {
+        return RegistrationDTO.builder()
+                .email("admin@gmail.com")
+                .password("admin")
+                .username("admin")
+                .build();
+    }
+
+    @Bean
+    public AuthorizationDTO userAuthorizationDtoRequest() {
+        return AuthorizationDTO
+                .builder()
+                .email("dimon@gmail.com")
+                .password("qwerty")
+                .build();
+    }
+
+    @Bean
+    public AuthorizationDTO adminAuthorizationDtoRequest() {
+        return AuthorizationDTO
+                .builder()
+                .email("admin@gmail.com")
+                .password("admin")
                 .build();
     }
 }

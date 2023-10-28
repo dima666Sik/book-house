@@ -7,12 +7,13 @@ public class DispatcherServetConfig extends AbstractAnnotationConfigDispatcherSe
 
     @Override
     protected Class<?>[] getRootConfigClasses() {
-        return new Class[]{AuthConfig.class, HibernateConfig.class};
+        return new Class[]{HibernateConfig.class};
     }
 
     @Override
     protected Class<?>[] getServletConfigClasses() {
-        return new Class[]{MVCConfig.class};}
+        return new Class[]{AuthConfig.class};
+    }
 
     @Override
     protected String[] getServletMappings() {

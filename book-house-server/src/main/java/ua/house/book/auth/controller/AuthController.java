@@ -1,52 +1,32 @@
 package ua.house.book.auth.controller;
 
 import lombok.AllArgsConstructor;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import ua.house.book.auth.domain.Role;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import ua.house.book.auth.domain.dto.request.AuthorizationDTO;
+import ua.house.book.auth.domain.dto.request.RegistrationDTO;
 import ua.house.book.auth.domain.entity.Account;
-import ua.house.book.auth.domain.entity.User;
 import ua.house.book.auth.service.AuthService;
 
-import java.util.Set;
-
-@Controller
+@RestController
 @AllArgsConstructor
-@RequestMapping("/auth")
+@RequestMapping("/api/auth")
 public class AuthController {
     private AuthService authService;
-    @GetMapping("/registration")
-    public String registration() {
-        System.out.println("Registration is successful!");
-            Account user = User.builder()
-                    .id(null)
-                    .email("dimon@gmail.com")
-                    .password("qwerty")
-                    .username("dimas")
-                    .roleSet(Set.of(Role.USER))
-                    .build();
-            authService.registration(user);
-        return "registration";
+
+    @PostMapping("/user/registration")
+    public void ordinalRegistration(@RequestBody RegistrationDTO registrationDTORequest) {
+        authService.ordinalRegistration(registrationDTORequest);
     }
-    @GetMapping("/authorization")
-    public String authorization(Model model) {
-            Account user = User.builder()
-                .id(null)
-                .email("dimon@gmail.com")
-                .password("qwerty")
-                .username("dimas")
-                .roleSet(Set.of(Role.USER))
-                .build();
 
-        Account userRes = authService.authorization(user.getEmail(),user.getPassword(), User.class)
-                .orElseThrow(()->new RuntimeException("Not found!"));
-        System.out.println("Authorization is successful!");
+    @PostMapping("/admin/registration")
+    public void adminRegistration(@RequestBody RegistrationDTO registrationDTORequest) {
+        authService.adminRegistration(registrationDTORequest);
+    }
 
-        // Добавьте объект user в модель
-        model.addAttribute("user", userRes);
-        return "authorization";
+    @PostMapping("/authorization")
+    public ResponseEntity<String> authorization(@RequestBody AuthorizationDTO authorizationDTORequest) {
+        Account account = authService.authorization(authorizationDTORequest);
+        return ResponseEntity.ok().body("User authorization " + account.getEmail() + " is successful");
     }
 }

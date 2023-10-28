@@ -1,6 +1,7 @@
 package ua.house.book.auth.service;
 
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -13,12 +14,16 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import ua.house.book.auth.config.TestHibernateConfig;
 import ua.house.book.auth.config.TestAuthConfig;
+import ua.house.book.auth.domain.dto.request.AuthorizationDTO;
+import ua.house.book.auth.domain.dto.request.RegistrationDTO;
 import ua.house.book.auth.domain.entity.Account;
 import ua.house.book.auth.domain.entity.Admin;
 import ua.house.book.auth.domain.entity.User;
 import ua.house.book.auth.dao.AccountDAO;
 
 import java.util.Optional;
+
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @ExtendWith(MockitoExtension.class)
 @ExtendWith(SpringExtension.class)
@@ -32,12 +37,20 @@ public class AuthServiceImplTest {
     private Account userAccount;
     @Autowired
     private Account adminAccount;
+    @Autowired
+    private RegistrationDTO userAccountRegistrationDtoRequest;
+    @Autowired
+    private RegistrationDTO adminAccountRegistrationDtoRequest;
+    @Autowired
+    private AuthorizationDTO userAuthorizationDtoRequest;
+    @Autowired
+    private AuthorizationDTO adminAuthorizationDtoRequest;
 
     @Test
     @Order(1)
     void registrationUserShouldBeSuccessful() {
         Mockito.doNothing().when(accountDAO).createAccount(Mockito.any());
-        authService.registration(userAccount);
+        authService.ordinalRegistration(userAccountRegistrationDtoRequest);
         Mockito.verify(accountDAO, Mockito.times(1)).createAccount(userAccount);
     }
 
@@ -46,17 +59,16 @@ public class AuthServiceImplTest {
     void authorizationUserShouldReturnAccount() {
         Mockito.when(accountDAO.
                         findAccountByEmailAndPassword(userAccount.getEmail(),
-                                userAccount.getPassword(), User.class))
+                                userAccount.getPassword()))
                 .thenReturn(Optional.ofNullable(userAccount));
-        Account resFindAcc = authService.authorization(userAccount.getEmail(), userAccount.getPassword(), User.class).orElseThrow(() -> new RuntimeException("Not found User"));
-        Assertions.assertEquals(userAccount, resFindAcc);
+        Assertions.assertEquals(userAccount, authService.authorization(userAuthorizationDtoRequest));
     }
 
     @Test
     @Order(3)
     void registrationAdminShouldBeSuccessful() {
         Mockito.doNothing().when(accountDAO).createAccount(Mockito.any());
-        authService.registration(adminAccount);
+        authService.adminRegistration(adminAccountRegistrationDtoRequest);
         Mockito.verify(accountDAO, Mockito.times(1)).createAccount(adminAccount);
     }
 
@@ -65,9 +77,9 @@ public class AuthServiceImplTest {
     void authorizationAdminShouldReturnAccount() {
         Mockito.when(accountDAO.
                         findAccountByEmailAndPassword(adminAccount.getEmail(),
-                                adminAccount.getPassword(), Admin.class))
+                                adminAccount.getPassword()))
                 .thenReturn(Optional.ofNullable(adminAccount));
-        Account resFindAcc = authService.authorization(adminAccount.getEmail(), adminAccount.getPassword(), Admin.class).orElseThrow(() -> new RuntimeException("Not found Admin"));
-        Assertions.assertEquals(adminAccount, resFindAcc);
+        Assertions.assertEquals(adminAccount, authService.authorization(adminAuthorizationDtoRequest));
     }
+
 }

@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import ua.house.book.auth.domain.Role;
 import ua.house.book.auth.domain.entity.Account;
 import ua.house.book.auth.dao.hql.AccountHQL;
+import ua.house.book.auth.domain.entity.Admin;
 import ua.house.book.auth.domain.entity.User;
 
 import java.util.Optional;
@@ -31,21 +32,19 @@ public class AccountDAOImpl implements AccountDAO {
     }
 
     @Override
-    public Optional<Account> findAccountByEmailAndPassword(String email, String password, Class<? extends Account> clazz) {
-        System.out.println("repos:" + email + " " + password + " " + clazz);
-
-        Account resultSearch = null;
-        try {
-            System.out.print("List:");
-            System.out.println(currentSession().createQuery(AccountHQL.findAll(clazz), clazz).getResultList());
-            resultSearch = currentSession()
-                    .createQuery(AccountHQL.findAccountByEmailAndPassword(clazz), clazz)
+    public Optional<Account> findAccountByEmailAndPassword(String email, String password) {
+        Account resultSearch = currentSession()
+                .createQuery(AccountHQL.FIND_USER_BY_EMAIL_AND_PASSWORD, User.class)
+                .setParameter("email", email)
+                .setParameter("password", password)
+                .uniqueResult();
+        if (resultSearch == null) {
+            return Optional.ofNullable(currentSession()
+                    .createQuery(AccountHQL.FIND_ADMIN_BY_EMAIL_AND_PASSWORD, Admin.class)
                     .setParameter("email", email)
                     .setParameter("password", password)
-                    .getSingleResult();
-        } catch (NoResultException noResultException) {
-            noResultException.printStackTrace();
+                    .uniqueResult());
         }
-        return Optional.ofNullable(resultSearch);
+        return Optional.of(resultSearch);
     }
 }

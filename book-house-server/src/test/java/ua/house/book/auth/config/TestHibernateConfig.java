@@ -8,6 +8,7 @@ import org.springframework.core.env.Environment;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
+import org.springframework.test.context.TestPropertySource;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
@@ -17,7 +18,7 @@ import java.util.Properties;
 @AllArgsConstructor
 @Configuration
 @EnableTransactionManagement
-@PropertySource("classpath:/hibernate-h2.properties")
+@TestPropertySource("classpath:/hibernate-h2.properties")
 public class TestHibernateConfig {
     private final Environment env;
 

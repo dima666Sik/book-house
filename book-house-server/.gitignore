@@ -5,7 +5,7 @@ target/
 target
 out
 src/main/resources/hibernate-mysql.properties
-src/main/resources/hibernate-h2.properties
+src/test/resources/hibernate-h2.properties
 
 
 ### IntelliJ IDEA ###
