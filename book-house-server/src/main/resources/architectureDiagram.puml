@@ -21,7 +21,7 @@ rectangle "AuthServiceRec" {
     [AuthService] <<Interface Service>>
     [AuthServiceImpl] <<Service>>
 
-  [AuthService] <--* [AuthController]
+  [AuthService] <--o [AuthController]
   [AuthServiceImpl] ..|> [AuthService]
 }
 
@@ -29,7 +29,7 @@ rectangle "AuthRepositoryRec" {
     [AccountRepository] <<Interface Repository>>
     [AccountRepositoryImpl] <<Repository>>
 
-  [AccountRepository] <--* [AuthServiceImpl]
+  [AccountRepository] <--o [AuthServiceImpl]
   [AccountRepositoryImpl] ..|> [AccountRepository]
 }
 
@@ -57,7 +57,7 @@ rectangle "CoreServiceRec" {
     [OrderService] <<Interface Service>>
     [OrderServiceImpl] <<Service>>
 
-  [OrderService] <--* [OrderController]
+  [OrderService] <--o [OrderController]
   [OrderServiceImpl] ..|> [OrderService]
 }
 
@@ -65,7 +65,7 @@ rectangle "CoreRepositoryRec" {
     [ProductRepository] <<Interface Repository>>
     [ProductRepositoryImpl] <<Repository>>
 
-  [ProductRepository] <--* [OrderServiceImpl]
+  [ProductRepository] <--o [OrderServiceImpl]
   [ProductRepositoryImpl] ..|> [ProductRepository]
 }
 
