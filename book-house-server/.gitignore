@@ -6,7 +6,7 @@ target
 out
 src/main/resources/hibernate-mysql.properties
 src/test/resources/hibernate-h2.properties
-/~
+/~/db
 
 ### IntelliJ IDEA ###
 .idea/

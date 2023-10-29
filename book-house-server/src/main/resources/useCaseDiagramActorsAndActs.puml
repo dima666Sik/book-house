@@ -9,23 +9,29 @@ actor Admin
 package Core{
     (Check products) as (CP)
     (Order products) as (OP)
+    (Create products) as (CrP)
+    (Delete products) as (DP)
 }
 
 package Auth{
     (Authorization) as (Author)
     (Registration) as (Reg)
+    (Create Admins) as (CA)
+    (Authentication) as (Authen)
 }
 
 User -> (CP)
-User -> (OP)
-User --> (Reg)
+User ---> (OP)
 User -> (Author)
+User -> (Authen)
 
 Guest ---> (CP)
 Guest --> (Reg)
-Guest --> (Author)
 
 Admin ----> (CP)
-Admin ---> (Reg)
 Admin ---> (Author)
+Admin --> (CA)
+Admin ---> (CrP)
+Admin ----> (DP)
+Admin -> (Authen)
 @enduml

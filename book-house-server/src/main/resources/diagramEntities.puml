@@ -13,17 +13,34 @@ enum Role {
 }
 
 abstract class Account{
+    -...
     -Set<Role> setRole
     -Set<Product> setProduct
     -Set<Order> setOrder
 }
 
 abstract class Product{
+    -...
     -Account account
 }
 
 class Order{
+    -...
     -Account account
+}
+
+class Wallet{
+    -...
+    -Account account
+}
+class User{
+    -...
+}
+class Admin{
+    -...
+}
+class Book{
+    -...
 }
 
 ' Relationship between entities '
@@ -36,5 +53,7 @@ Product <|-- Book
 Product "1" *-- "*" Account : belongs to
 Account "1" *-- "*" Order : owns
 Order "1" *-- "*" Account : belongs to
+Account "1" *-- "*" Wallet : owns
+Wallet "1" *-- "*" Account : belongs to
 
 @enduml
