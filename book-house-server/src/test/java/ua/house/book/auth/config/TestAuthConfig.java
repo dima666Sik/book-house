@@ -46,7 +46,7 @@ public class TestAuthConfig {
                 .email("admin@gmail.com")
                 .password("admin")
                 .username("admin")
-                .roleSet(Set.of(Role.USER, Role.ADMIN))
+                .roleSet(Set.of(Role.ADMIN))
                 .build();
     }
 

@@ -11,6 +11,8 @@ package Core{
     (Order products) as (OP)
     (Create products) as (CrP)
     (Delete products) as (DP)
+    (Edit products) as (EP)
+    (Sort products `Asc-Desc`) as (SP)
 }
 
 package Auth{
@@ -18,20 +20,26 @@ package Auth{
     (Registration) as (Reg)
     (Create Admins) as (CA)
     (Authentication) as (Authen)
+    (Logout) as (L)
 }
 
 User -> (CP)
 User ---> (OP)
-User -> (Author)
 User -> (Authen)
+User --> (SP)
+User ---> (L)
 
 Guest ---> (CP)
 Guest --> (Reg)
+Guest --> (Author)
+Guest -> (SP)
 
 Admin ----> (CP)
-Admin ---> (Author)
 Admin --> (CA)
 Admin ---> (CrP)
 Admin ----> (DP)
 Admin -> (Authen)
+Admin -> (EP)
+Admin -> (SP)
+Admin -> (L)
 @enduml

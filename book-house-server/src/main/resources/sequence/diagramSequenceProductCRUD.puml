@@ -1,0 +1,15 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+    'Authorization
+     Client -> Server_API_Auth: Product Request
+     Server_API_Auth -> Server_API_Auth : Check user access\n rights for doing crud\n operations
+     Server_API_Auth -> Server_API_Auth : Handling Server data from client
+
+     database DB as DB
+     Server_API_Auth -> DB: CRUD operations
+     Server_API_Auth <-- DB: Get handling result
+
+     Client <-- Server_API_Auth: Authorization Response
+@enduml

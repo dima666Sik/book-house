@@ -4,7 +4,6 @@ skinparam linetype ortho
 
 class User
 class Admin
-class Book
 
 enum Role {
     GUEST
@@ -13,33 +12,43 @@ enum Role {
 }
 
 abstract class Account{
-    -...
-    -Set<Role> setRole
-    -Set<Product> setProduct
-    -Set<Order> setOrder
+    -Long id;
+    -String username;
+    -String email;
+    -String password;
+    -Set<Role> setRole;
 }
 
-abstract class Product{
+class Product{
+    -Long id;
+    -String productName;
+    -String count;
+    -Long price;
     -...
-    -Account account
 }
 
 class Order{
+    -Long id;
+    -Set<Product> setProduct
     -...
-    -Account account
 }
 
 class Wallet{
     -...
-    -Account account
 }
+
+class Card{
+    -...
+}
+
+class Money{
+    -...
+}
+
 class User{
     -...
 }
 class Admin{
-    -...
-}
-class Book{
     -...
 }
 
@@ -48,12 +57,17 @@ class Book{
 Account <|-- User
 Account <|-- Admin
 Account "1" *-- "*" Role : has
-Account "1" *-- "*" Product : owns
-Product <|-- Book
-Product "1" *-- "*" Account : belongs to
-Account "1" *-- "*" Order : owns
-Order "1" *-- "*" Account : belongs to
-Account "1" *-- "*" Wallet : owns
-Wallet "1" *-- "*" Account : belongs to
 
+User "1" *-- "*" Order : owns
+Order "1" *-- "*" User : belongs to
+User "1" *-- "*" Wallet : owns
+Wallet "1" *-- "*" User : belongs to
+Wallet "1" *-- "*" Card : owns
+Card "1" *-- "*" Wallet : belongs to
+
+Card "1" *-- "*" Money : owns
+Money "1" *-- "*" Card : belongs to
+
+Order "1" *-- "*" Product : owns
+Product "1" *-- "*" Order : belongs to
 @enduml

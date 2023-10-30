@@ -15,13 +15,15 @@ public class AuthController {
     private AuthService authService;
 
     @PostMapping("/user/registration")
-    public void ordinalRegistration(@RequestBody RegistrationDTO registrationDTORequest) {
+    public ResponseEntity<String> ordinalRegistration(@RequestBody RegistrationDTO registrationDTORequest) {
         authService.ordinalRegistration(registrationDTORequest);
+        return ResponseEntity.ok().body("User registration " + registrationDTORequest.getEmail() + " is successful");
     }
 
     @PostMapping("/admin/registration")
-    public void adminRegistration(@RequestBody RegistrationDTO registrationDTORequest) {
+    public ResponseEntity<String> adminRegistration(@RequestBody RegistrationDTO registrationDTORequest) {
         authService.adminRegistration(registrationDTORequest);
+        return ResponseEntity.ok().body("Admin registration " + registrationDTORequest.getEmail() + " is successful");
     }
 
     @PostMapping("/authorization")
