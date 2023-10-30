@@ -1,0 +1,23 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+    'Authorization
+     Client -> Server_API_Auth: Product Request
+     Server_API_Auth -> Server_API_Auth : Check user access\n rights for doing crud\n operations
+     Server_API_Auth -> Server_API_Auth : Handling Server data from client
+
+     database DB as DB
+     note left : Transaction (Atomic)
+     activate Server_API_Auth
+     Server_API_Auth -> DB:Reduce money from the user's card
+     Server_API_Auth <-- DB:Get response
+     Server_API_Auth -> DB:Reduce count Products on site
+     Server_API_Auth <-- DB:Get response
+     Server_API_Auth -> DB:Add order to user
+     Server_API_Auth <-- DB:Get response
+    note left : End Transaction
+     deactivate Server_API_Auth
+     Client <-- Server_API_Auth: Authorization Response
+
+@enduml

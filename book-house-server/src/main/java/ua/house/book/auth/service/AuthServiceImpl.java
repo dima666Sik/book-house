@@ -39,7 +39,7 @@ public class AuthServiceImpl implements AuthService {
                 .email(accountDTORequest.getEmail())
                 .password(accountDTORequest.getPassword())
                 .username(accountDTORequest.getUsername())
-                .roleSet(Set.of(Role.USER, Role.ADMIN))
+                .roleSet(Set.of(Role.ADMIN))
                 .build();
         accountDAO.createAccount(admin);
     }

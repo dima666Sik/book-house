@@ -4,19 +4,13 @@
 autonumber
     'Registration
     Client -> Server_API_Auth: Registration Request
+    Server_API_Auth -> Server_API_Auth : Check user access rights
+    Server_API_Auth -> Server_API_Auth : Check validation data
     Server_API_Auth -> Server_API_Auth : Handling Server data from client
 
+    database DB as DB
     Server_API_Auth -> DB: CRUD operation
     Server_API_Auth <-- DB: Get handling result
 
     Client <-- Server_API_Auth: Registration Response
-
-    'Authorization
-    Client -> Server_API_Auth: Authorization Request
-    Server_API_Auth -> Server_API_Auth : Handling Server data from client
-
-    Server_API_Auth -> DB: CRUD operation
-    Server_API_Auth <-- DB: Get handling result
-
-    Client <-- Server_API_Auth: Authorization Response
 @enduml

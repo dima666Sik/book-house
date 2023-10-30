@@ -1,26 +1,32 @@
 @startuml
 skinparam linetype ortho
 
-rectangle "auth" {
-    [Service] as AuthServiceRec
+package "auth" {
+    interface AuthService {
+        +void ordinalRegistration(RegistrationDTO accountDTORequest);
+        +void adminRegistration(RegistrationDTO accountDTORequest);
+        +Account authorization(AuthorizationDTO authorizationDTORequest);
+    }
 }
 
-rectangle "AuthServiceRec" {
-    [AuthService] <<Interface Service>>
-    [AuthServiceImpl] <<Service>>
 
-  [AuthServiceImpl] ..|> [AuthService]
-}
+package "core" {
+     interface ProductService {
+        +boolean createProduct(ProductDTO productDTORequest);
+        +boolean editProduct(Long idProduct);
+        +boolean deleteProduct(Long idProduct);
+        +Product readProduct(Long idProduct);
+        +List<Product> readAllProducts();
+     }
 
-rectangle "core" {
-    [Service] as CoreServiceRec
-}
+     interface ProductSortService {
+        +List<Product> ascendingSortProducts();
+        +List<Product> descendingSortProducts();
+     }
 
-rectangle "CoreServiceRec" {
-    [OrderService] <<Interface Service>>
-    [OrderServiceImpl] <<Service>>
-
-  [OrderServiceImpl] ..|> [OrderService]
+     interface ProductOrderService {
+        +boolean createOrder(List<Product> listProduct, Long idUser);
+     }
 }
 
 
