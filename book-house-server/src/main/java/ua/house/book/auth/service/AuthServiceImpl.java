@@ -8,11 +8,9 @@ import ua.house.book.auth.domain.dto.request.AuthorizationDTO;
 import ua.house.book.auth.domain.dto.request.RegistrationDTO;
 import ua.house.book.auth.domain.entity.Account;
 import ua.house.book.auth.dao.AccountDAO;
-import ua.house.book.auth.domain.entity.Admin;
 import ua.house.book.auth.domain.entity.User;
 import ua.house.book.auth.exception.UserNotFoundException;
 
-import java.util.Optional;
 import java.util.Set;
 
 @AllArgsConstructor
@@ -35,7 +33,7 @@ public class AuthServiceImpl implements AuthService {
     @Override
     @Transactional
     public void adminRegistration(RegistrationDTO accountDTORequest) {
-        Account admin = Admin.builder()
+        Account admin = User.builder()
                 .email(accountDTORequest.getEmail())
                 .password(accountDTORequest.getPassword())
                 .username(accountDTORequest.getUsername())

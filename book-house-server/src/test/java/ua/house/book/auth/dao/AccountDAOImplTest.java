@@ -1,9 +1,7 @@
 package ua.house.book.auth.dao;
 
-import org.hibernate.annotations.processing.SQL;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.jdbc.Sql;
@@ -11,8 +9,6 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import ua.house.book.auth.config.TestHibernateConfig;
 import ua.house.book.auth.config.TestAuthConfig;
 import ua.house.book.auth.domain.entity.Account;
-import ua.house.book.auth.domain.entity.Admin;
-import ua.house.book.auth.domain.entity.User;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 

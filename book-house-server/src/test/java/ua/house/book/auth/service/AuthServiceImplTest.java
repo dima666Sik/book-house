@@ -1,7 +1,6 @@
 package ua.house.book.auth.service;
 
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -17,8 +16,6 @@ import ua.house.book.auth.config.TestAuthConfig;
 import ua.house.book.auth.domain.dto.request.AuthorizationDTO;
 import ua.house.book.auth.domain.dto.request.RegistrationDTO;
 import ua.house.book.auth.domain.entity.Account;
-import ua.house.book.auth.domain.entity.Admin;
-import ua.house.book.auth.domain.entity.User;
 import ua.house.book.auth.dao.AccountDAO;
 
 import java.util.Optional;

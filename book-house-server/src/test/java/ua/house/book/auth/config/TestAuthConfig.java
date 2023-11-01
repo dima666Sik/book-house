@@ -7,7 +7,6 @@ import ua.house.book.auth.domain.Role;
 import ua.house.book.auth.domain.dto.request.AuthorizationDTO;
 import ua.house.book.auth.domain.dto.request.RegistrationDTO;
 import ua.house.book.auth.domain.entity.Account;
-import ua.house.book.auth.domain.entity.Admin;
 import ua.house.book.auth.domain.entity.User;
 import ua.house.book.auth.dao.AccountDAOImplTest;
 import ua.house.book.auth.service.AuthServiceImplTest;
@@ -41,7 +40,7 @@ public class TestAuthConfig {
 
     @Bean
     public Account adminAccount() {
-        return Admin.builder()
+        return User.builder()
                 .id(null)
                 .email("admin@gmail.com")
                 .password("admin")
