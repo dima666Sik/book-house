@@ -16,10 +16,6 @@ import javax.annotation.PostConstruct;
 @RequiredArgsConstructor
 public class AccountUserDetailsService implements UserDetailsService {
     private final AccountDAO accountDAO;
-    @PostConstruct
-    public void init(){
-        LogManager.getLogger(this.getClass().getName()).info("----------------"+this.getClass().getName());
-    }
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         return accountDAO.findAccountByEmail(username)
