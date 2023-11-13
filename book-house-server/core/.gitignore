@@ -1,0 +1,4 @@
+logs
+src/main/resources/hibernate-mysql.properties
+src/test/resources/hibernate-testdb.properties
+target
