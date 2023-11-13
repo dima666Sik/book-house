@@ -1,0 +1,126 @@
+@startuml
+skinparam linetype ortho
+
+rectangle "web-browser" {
+    [Client Application]
+}
+
+rectangle "filters" {
+  [Client Application] ..> [SecurityConfig] : API calls (HTTP/JSON) handling filters
+}
+
+rectangle "auth" {
+    [Controller] as AuthControllerRec
+    [Service] as AuthServiceRec
+    [Repository] as AuthRepositoryRec
+}
+
+rectangle "AuthControllerRec" {
+  [AuthController] <<Controller>>
+  [SecurityConfig] ..> [AuthControllerRec] : API calls (HTTP/JSON)
+
+}
+
+rectangle "AuthServiceRec" {
+    [AuthService] <<Interface Service>>
+    [AuthServiceImpl] <<Service>>
+
+  [AuthService] <--o [AuthController]
+  [AuthServiceImpl] ..|> [AuthService]
+}
+
+rectangle "AuthRepositoryRec" {
+    [AccountRepository] <<Interface Repository>>
+    [AccountRepositoryImpl] <<Repository>>
+
+  [AccountRepository] <--o [AuthServiceImpl]
+  [AccountRepositoryImpl] ..|> [AccountRepository]
+}
+
+database "MySql" {
+  frame "db:book-house" {
+  }
+}
+
+[AccountRepositoryImpl] --> [db:book-house] #Blue
+
+rectangle "core" {
+    [Controller] as CoreProductControllerRec
+    [Controller] as CoreProductSortControllerRec
+    [Controller] as CoreProductOrderControllerRec
+    [Service] as CoreProductServiceRec
+    [Service] as CoreProductSortServiceRec
+    [Service] as CoreProductOrderServiceRec
+    [Repository] as CoreProductRepositoryRec
+    [Repository] as CoreProductSortRepositoryRec
+    [Repository] as CoreProductOrderRepositoryRec
+}
+
+rectangle "CoreProductControllerRec" {
+  [ProductController] <<Controller>>
+  [SecurityConfig] ..> [CoreProductControllerRec] : API calls (HTTP/JSON)
+}
+
+rectangle "CoreProductServiceRec" {
+    [ProductService] <<Interface Service>>
+    [ProductServiceImpl] <<Service>>
+
+  [ProductService] <--o [ProductController]
+  [ProductServiceImpl] ..|> [ProductService]
+}
+
+rectangle "CoreProductRepositoryRec" {
+    [ProductRepository] <<Interface Repository>>
+    [ProductRepositoryImpl] <<Repository>>
+
+  [ProductRepository] <--o [ProductServiceImpl]
+  [ProductRepositoryImpl] ..|> [ProductRepository]
+}
+
+rectangle "CoreProductSortControllerRec" {
+  [ProductSortController] <<Controller>>
+  [SecurityConfig] ..> [CoreProductSortControllerRec] : API calls (HTTP/JSON)
+}
+
+rectangle "CoreProductSortServiceRec" {
+    [ProductSortService] <<Interface Service>>
+    [ProductSortServiceImpl] <<Service>>
+
+  [ProductSortService] <--o [ProductSortController]
+  [ProductSortServiceImpl] ..|> [ProductSortService]
+}
+
+rectangle "CoreProductSortRepositoryRec" {
+    [ProductSortRepository] <<Interface Repository>>
+    [ProductSortRepositoryImpl] <<Repository>>
+
+  [ProductSortRepository] <--o [ProductSortServiceImpl]
+  [ProductSortRepositoryImpl] ..|> [ProductSortRepository]
+}
+
+rectangle "CoreProductOrderControllerRec" {
+  [ProductOrderController] <<Controller>>
+  [SecurityConfig] ..> [CoreProductOrderControllerRec] : API calls (HTTP/JSON)
+}
+
+rectangle "CoreProductOrderServiceRec" {
+    [ProductOrderService] <<Interface Service>>
+    [ProductOrderServiceImpl] <<Service>>
+
+  [ProductOrderService] <--o [ProductOrderController]
+  [ProductOrderServiceImpl] ..|> [ProductOrderService]
+}
+
+rectangle "CoreProductOrderRepositoryRec" {
+    [ProductOrderRepository] <<Interface Repository>>
+    [ProductOrderRepositoryImpl] <<Repository>>
+
+  [ProductOrderRepository] <--o [ProductOrderServiceImpl]
+  [ProductOrderRepositoryImpl] ..|> [ProductOrderRepository]
+}
+
+
+[ProductRepositoryImpl] --> [db:book-house] #Blue
+[ProductSortRepositoryImpl] --> [db:book-house] #Blue
+
+@enduml
