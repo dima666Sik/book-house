@@ -15,10 +15,6 @@ import javax.annotation.PostConstruct;
 @RequiredArgsConstructor
 public class LogoutAccountService implements LogoutHandler {
     private final TokenDAO tokenDAO;
-    @PostConstruct
-    public void init(){
-        LogManager.getLogger(this.getClass().getName()).info("----------------"+this.getClass().getName());
-    }
     @Override
     public void logout(
             HttpServletRequest request,
