@@ -1,5 +1,0 @@
-logs
-src/main/resources/hibernate-mysql.properties
-src/main/resources/jwt.properties
-src/test/resources/hibernate-testdb.properties
-target
