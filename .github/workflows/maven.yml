@@ -23,7 +23,7 @@ jobs:
         image: mysql:latest
         env:
           MYSQL_ROOT_PASSWORD: root
-          MYSQL_DATABASE: book-house
+          MYSQL_DATABASE: book_house
         ports:
           - 3307:3306
         options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
@@ -36,8 +36,8 @@ jobs:
           java-version: "17"
           distribution: "temurin"
           cache: maven
-      - name: Build with Maven
-        run: mvn -B package --file book-house-server/pom.xml
+      - name: Build with Maven monolitic app
+        run: mvn package
 
   test-auth:
     runs-on: ubuntu-latest
@@ -47,7 +47,7 @@ jobs:
         image: mysql:latest
         env:
           MYSQL_ROOT_PASSWORD: root
-          MYSQL_DATABASE: book-house
+          MYSQL_DATABASE: test_book_house
         ports:
           - 3307:3306
         options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
@@ -60,5 +60,5 @@ jobs:
           java-version: "17"
           distribution: "temurin"
           cache: maven
-      - name: Build and test auth module
-        run: mvn -B clean verify --file book-house-server/auth/pom.xml
+      - name: Build and test monolitic app
+        run: mvn clean verify
