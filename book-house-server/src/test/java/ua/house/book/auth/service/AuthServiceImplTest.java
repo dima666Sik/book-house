@@ -35,7 +35,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 @ExtendWith(MockitoExtension.class)
 @ExtendWith(SpringExtension.class)
 @ContextConfiguration(classes = {TestHibernateConfig.class, TestAuthConfig.class, TestAuthBeansConfig.class})
-public class AuthServiceImplTest {
+class AuthServiceImplTest {
     @InjectMocks
     private AuthServiceImpl authService;
     @Mock

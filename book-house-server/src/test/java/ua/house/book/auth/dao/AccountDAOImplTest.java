@@ -18,7 +18,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 @ExtendWith(SpringExtension.class)
 @ContextConfiguration(classes = {TestHibernateConfig.class, TestAuthConfig.class, TestAuthBeansConfig.class})
 @Sql(value = {"/src/test/resources/drop-test-users-before.sql"}, executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
-public class AccountDAOImplTest {
+class AccountDAOImplTest {
     @Inject
     private AccountDAO accountDAO;
     @Inject

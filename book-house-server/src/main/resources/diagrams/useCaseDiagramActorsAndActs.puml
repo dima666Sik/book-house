@@ -6,7 +6,7 @@ actor User
 actor Guest
 actor Admin
 
-package Core{
+package core{
     (Check products) as (CP)
     (Order products) as (OP)
     (Create products) as (CrP)
@@ -15,7 +15,7 @@ package Core{
     (Sort products `Asc-Desc`) as (SP)
 }
 
-package Auth{
+package auth{
     (Authorization) as (Author)
     (Registration) as (Reg)
     (Create Admins) as (CA)
@@ -23,11 +23,18 @@ package Auth{
     (Logout) as (L)
 }
 
-User -> (CP)
-User ---> (OP)
-User -> (Authen)
+package creditcard{
+    (Create card) as (CC)
+    (Get card) as (GC)
+}
+
 User --> (SP)
 User ---> (L)
+User ----> (CC)
+User ---> (GC)
+User --> (CP)
+User --> (OP)
+User --> (Authen)
 
 Guest ---> (CP)
 Guest --> (Reg)

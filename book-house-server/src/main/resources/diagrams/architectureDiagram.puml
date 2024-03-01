@@ -9,6 +9,11 @@ rectangle "filters" {
   [Client Application] ..> [SecurityConfig] : API calls (HTTP/JSON) handling filters
 }
 
+database "MySql" {
+  frame "db:book-house" {
+  }
+}
+
 rectangle "auth" {
     [Controller] as AuthControllerRec
     [Service] as AuthServiceRec
@@ -37,10 +42,7 @@ rectangle "AuthRepositoryRec" {
   [AccountRepositoryImpl] ..|> [AccountRepository]
 }
 
-database "MySql" {
-  frame "db:book-house" {
-  }
-}
+
 
 [AccountRepositoryImpl] --> [db:book-house] #Blue
 
@@ -119,7 +121,39 @@ rectangle "CoreProductOrderRepositoryRec" {
   [ProductOrderRepositoryImpl] ..|> [ProductOrderRepository]
 }
 
+rectangle "creditcard" {
+    [Controller] as CardControllerRec
+    [Service] as CardServiceRec
+    [Repository] as CardRepositoryRec
+}
 
+
+
+rectangle "CardControllerRec" {
+  [CardController] <<Controller>>
+  [SecurityConfig] ..> [CardControllerRec] : API calls (HTTP/JSON)
+
+}
+
+rectangle "CardServiceRec" {
+    [CardService] <<Interface Service>>
+    [CardServiceImpl] <<Service>>
+
+  [CardService] <--o [CardController]
+  [CardServiceImpl] ..|> [CardService]
+}
+
+rectangle "CardRepositoryRec" {
+    [CardRepository] <<Interface Repository>>
+    [CardRepositoryImpl] <<Repository>>
+
+  [CardRepository] <--o [CardServiceImpl]
+  [CardRepositoryImpl] ..|> [CardRepository]
+}
+
+
+
+[CardRepositoryImpl] --> [db:book-house] #Blue
 [ProductRepositoryImpl] --> [db:book-house] #Blue
 [ProductSortRepositoryImpl] --> [db:book-house] #Blue
 
