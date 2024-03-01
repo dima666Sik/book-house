@@ -37,6 +37,16 @@ jobs:
       - name: Build with Maven monolithic app
         run: mvn -B package --file pom.xml
 
+      # Add the "Check Database Health" step here
+      - name: Check Database Health
+        run: |
+          # Wait for MySQL to start up
+          sleep 10
+
+          # Use mysqladmin to check database status
+          mysqladmin --host=localhost --port=3307 --user=root --password=root ping
+          mysqladmin --host=localhost --port=3307 --user=root --password=root status
+
   test-auth:
     runs-on: ubuntu-latest
 
