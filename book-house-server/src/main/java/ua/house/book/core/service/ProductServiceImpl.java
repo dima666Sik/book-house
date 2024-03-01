@@ -17,7 +17,7 @@ public class ProductServiceImpl implements ProductService {
     private final ProductDAO productDAO;
 
     private Product initProduct(ProductDTO productDTORequest) {
-        Money money = Money.builder()
+        var money = Money.builder()
                 .amount(productDTORequest.getMoneyDTO().getAmount())
                 .currency(productDTORequest.getMoneyDTO().getCurrency())
                 .build();
@@ -31,13 +31,13 @@ public class ProductServiceImpl implements ProductService {
     @Transactional
     @Override
     public void createProduct(ProductDTO productDTORequest) {
-        Product product = initProduct(productDTORequest);
+        var product = initProduct(productDTORequest);
         productDAO.saveProduct(product);
     }
     @Transactional
     @Override
     public void updateProduct(ProductDTO productDTORequest) {
-        Product product = initProduct(productDTORequest);
+        var product = initProduct(productDTORequest);
         productDAO.updateProduct(product);
     }
     @Transactional
@@ -48,7 +48,7 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public ProductDTO readProduct(ProductDTO productDTORequest) {
-        Product product = productDAO.getProduct(productDTORequest.getId())
+        var product = productDAO.getProduct(productDTORequest.getId())
                 .orElseThrow(() -> new ProductNotFoundException("Not found product with this id: "
                         + productDTORequest.getId()));
         return ProductDTO

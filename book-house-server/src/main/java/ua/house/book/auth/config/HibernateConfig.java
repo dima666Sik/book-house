@@ -18,7 +18,7 @@ import java.util.Properties;
 @AllArgsConstructor
 @Configuration
 @EnableTransactionManagement
-@PropertySource("src/main/resources/hibernate-mysql.properties")
+@PropertySource("classpath:hibernate-mysql.properties")
 public class HibernateConfig {
     private final Environment env;
     @PostConstruct

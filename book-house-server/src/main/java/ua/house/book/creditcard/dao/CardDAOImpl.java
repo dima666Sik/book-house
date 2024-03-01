@@ -6,7 +6,7 @@ import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import ua.house.book.creditcard.dao.hql.CardHQL;
-import ua.house.book.creditcard.domain.entity.Cards;
+import ua.house.book.creditcard.domain.entity.Card;
 
 import java.util.Optional;
 
@@ -22,15 +22,15 @@ public class CardDAOImpl implements CardDAO {
 
     @Transactional
     @Override
-    public void saveCard(Cards cards) {
-        currentSession().merge(cards);
+    public void saveCard(Card card) {
+        currentSession().merge(card);
     }
 
     @Override
-    public Optional<Cards> getCard(Long idAccount) {
+    public Optional<Card> getCard(Long idAccount) {
         return Optional
                 .ofNullable(currentSession()
-                        .createQuery(CardHQL.FIND_CARD_BY_ACCOUNT_ID, Cards.class)
+                        .createQuery(CardHQL.FIND_CARD_BY_ACCOUNT_ID, Card.class)
                         .setParameter("idAccount", idAccount)
                         .uniqueResult());
     }

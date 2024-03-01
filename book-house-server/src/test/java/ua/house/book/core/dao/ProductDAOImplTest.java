@@ -22,7 +22,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @ExtendWith(SpringExtension.class)
 @ContextConfiguration(classes = {TestHibernateConfig.class, TestAuthConfig.class, TestCoreBeansConfig.class})
-@Sql(value = {"/src/test/resources/drop-test-core-before.sql"}, executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
+@Sql(value = {"classpath:drop-test-core-before.sql"}, executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
 class ProductDAOImplTest {
     @Inject
     private ProductDAO productDAO;

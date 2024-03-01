@@ -17,7 +17,7 @@ import java.util.Properties;
 @AllArgsConstructor
 @Configuration
 @EnableTransactionManagement
-@TestPropertySource("src/test/resources/hibernate-testdb.properties")
+@TestPropertySource("classpath:hibernate-testdb.properties")
 public class TestHibernateConfig {
     private final Environment env;
 

@@ -19,13 +19,13 @@ public class ProductSortServiceImpl implements ProductSortService {
 
     @Override
     public ResponseEntity<List<ProductDTO>> getAllProductsByAscendingOrder() {
-        List<Product> productList = productSortDAO.getAllProductsByAscendingOrder();
+        var productList = productSortDAO.getAllProductsByAscendingOrder();
         return ResponseEntity.ok().body(Mapper.productListIntoProductDTOList(productList));
     }
 
     @Override
     public ResponseEntity<List<ProductDTO>> getAllProductsByDescendingOrder() {
-        List<Product> productList = productSortDAO.getAllProductsByDescendingOrder();
+        var productList = productSortDAO.getAllProductsByDescendingOrder();
         return ResponseEntity.ok().body(Mapper.productListIntoProductDTOList(productList));
     }
 }

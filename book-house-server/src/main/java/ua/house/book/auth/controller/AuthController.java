@@ -20,7 +20,7 @@ public class AuthController {
 
     @PostMapping("/users/registration")
     public ResponseEntity<AuthResponseDTO> ordinalRegistration(@Valid @RequestBody RegistrationDTO registrationDTORequest) {
-        AuthResponseDTO authResponseDTO = authService.ordinalRegistration(registrationDTORequest);
+        var authResponseDTO = authService.ordinalRegistration(registrationDTORequest);
         return ResponseEntity
                 .status(HttpStatus.CREATED)
                 .body(authResponseDTO);
@@ -28,7 +28,7 @@ public class AuthController {
 
     @PostMapping("/admins/registration")
     public ResponseEntity<AuthResponseDTO> adminRegistration(@Valid @RequestBody RegistrationDTO registrationDTORequest) {
-        AuthResponseDTO authResponseDTO = authService.adminRegistration(registrationDTORequest);
+        var authResponseDTO = authService.adminRegistration(registrationDTORequest);
         return ResponseEntity
                 .status(HttpStatus.CREATED)
                 .body(authResponseDTO);
@@ -36,7 +36,7 @@ public class AuthController {
 
     @PostMapping("/authorization")
     public ResponseEntity<AuthResponseDTO> authorization(@Valid @RequestBody AuthorizationDTO authorizationDTORequest) {
-        AuthResponseDTO authResponseDTO = authService.authorization(authorizationDTORequest);
+        var authResponseDTO = authService.authorization(authorizationDTORequest);
         return ResponseEntity
                 .ok()
                 .body(authResponseDTO);

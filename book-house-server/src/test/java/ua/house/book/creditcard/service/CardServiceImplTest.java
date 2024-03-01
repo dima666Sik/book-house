@@ -7,7 +7,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
@@ -22,7 +21,7 @@ import ua.house.book.core.domain.entity.Money;
 import ua.house.book.creditcard.dao.CardDAO;
 import ua.house.book.creditcard.domain.dto.request.CardDTO;
 import ua.house.book.creditcard.domain.dto.request.MoneyCardDTO;
-import ua.house.book.creditcard.domain.entity.Cards;
+import ua.house.book.creditcard.domain.entity.Card;
 import ua.house.book.creditcard.domain.entity.MoneyCards;
 
 import java.util.Optional;
@@ -33,7 +32,7 @@ import static org.mockito.Mockito.when;
 @ExtendWith(MockitoExtension.class)
 @ExtendWith(SpringExtension.class)
 @ContextConfiguration(classes = {TestHibernateConfig.class, TestAuthConfig.class, TestCoreBeansConfig.class})
-class CardsServiceImplTest {
+class CardServiceImplTest {
     @InjectMocks
     private CardServiceImpl cardService;
     @Mock
@@ -68,12 +67,12 @@ class CardsServiceImplTest {
 
         cardService.createCard(authentication, cardDTO);
 
-        Mockito.verify(cardDAO, Mockito.times(1)).saveCard(Cards.builder()
-                .numberCard("xxxx-xxxx-xxxx-xxxx")
-                .cardEndDataMonth((short)5)
-                .cardEndDataYear((short)2026)
-                .cvc2("859")
-                .moneyCards(MoneyCards.builder()
+        Mockito.verify(cardDAO, Mockito.times(1)).saveCard(Card.builder()
+                                                               .numberCard("xxxx-xxxx-xxxx-xxxx")
+                                                               .cardEndDataMonth((short)5)
+                                                               .cardEndDataYear((short)2026)
+                                                               .cvc2("859")
+                                                               .moneyCards(MoneyCards.builder()
                         .spendLimit(1000)
                         .money(Money.builder()
                                 .id(null)
@@ -81,7 +80,7 @@ class CardsServiceImplTest {
                                 .currency(Currency.UAH)
                                 .build())
                         .build())
-                .account(userAccount)
-                .build());
+                                                               .account(userAccount)
+                                                               .build());
     }
 }

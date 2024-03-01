@@ -11,7 +11,7 @@ import ua.house.book.auth.domain.entity.Admin;
 import ua.house.book.auth.domain.entity.User;
 import ua.house.book.core.domain.Currency;
 import ua.house.book.core.domain.entity.Money;
-import ua.house.book.creditcard.domain.entity.Cards;
+import ua.house.book.creditcard.domain.entity.Card;
 import ua.house.book.creditcard.domain.entity.MoneyCards;
 
 import java.util.Set;
@@ -31,15 +31,15 @@ public class TestAuthBeansConfig {
     }
 
     @Bean
-    public Cards card(){
-        return Cards.builder()
-                .numberCard("xxxx-xxxx-xxxx-xxxx")
-                .cardEndDataMonth((short)5)
-                .cardEndDataYear((short)2026)
-                .cvc2("859")
-                .moneyCards(moneyCard())
-                .account(userAccount())
-                .build();
+    public Card card(){
+        return Card.builder()
+                   .numberCard("xxxx-xxxx-xxxx-xxxx")
+                   .cardEndDataMonth((short)5)
+                   .cardEndDataYear((short)2026)
+                   .cvc2("859")
+                   .moneyCards(moneyCard())
+                   .account(userAccount())
+                   .build();
     }
 
     @Bean

@@ -5,27 +5,19 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ua.house.book.auth.dao.AccountDAO;
-import ua.house.book.auth.domain.entity.Account;
 import ua.house.book.auth.exception.UserNotFoundException;
 import ua.house.book.core.dao.ProductDAO;
 import ua.house.book.core.dao.PurchaseOrderDAO;
-import ua.house.book.core.domain.dto.request.OrderDTO;
 import ua.house.book.core.domain.dto.request.OrdersDTO;
-import ua.house.book.core.domain.dto.request.PurchaseDTO;
 import ua.house.book.core.domain.entity.Order;
-import ua.house.book.core.domain.entity.Product;
 import ua.house.book.core.domain.entity.Purchase;
 import ua.house.book.creditcard.dao.CardDAO;
-import ua.house.book.creditcard.domain.entity.Cards;
 import ua.house.book.creditcard.domain.mapper.Mapper;
 import ua.house.book.creditcard.exception.CardNotFoundException;
 import ua.house.book.creditcard.exception.OnCardHaveNotEnoughMoney;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicInteger;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 @RequiredArgsConstructor
 @Service
@@ -39,8 +31,9 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
     @Transactional
     @Override
     public void createListOrder(Authentication authentication, OrdersDTO ordersDTO) {
-        String userEmail = authentication.getName();
-        Account account = accountDAO.findAccountByEmail(userEmail)
+        var userEmail = authentication.getName();
+        System.out.println(userEmail);
+        var account = accountDAO.findAccountByEmail(userEmail)
                 .orElseThrow(() -> new UserNotFoundException("User with email " + userEmail + " not found!"));
 
         List<Order> orderList = new ArrayList<>();
@@ -56,13 +49,13 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
                             .build());
                 });
 
-        Integer sumAllPurchases = findGeneralSumForOrders(ordersDTO);
+        var sumAllPurchases = findGeneralSumForOrders(ordersDTO);
 
         updateAvailableCountProduct(ordersDTO);
 
-        Cards cards = cardDAO.getCard(account.getId())
+        var cards = cardDAO.getCard(account.getId())
                 .orElseThrow(() -> new CardNotFoundException("Card on this id account " + account.getId() + " not found!"));
-        Integer currentAmountIntoCard = cards.getMoneyCards().getMoney().getAmount();
+        var currentAmountIntoCard = cards.getMoneyCards().getMoney().getAmount();
 
         if (sumAllPurchases > currentAmountIntoCard)
             throw new OnCardHaveNotEnoughMoney("For creating orders u have not into card: "
@@ -84,7 +77,7 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
     }
 
     private void updateAvailableCountProduct(OrdersDTO ordersDTO) {
-        List<Product> productList = ordersDTO.getOrderDTOList()
+        var productList = ordersDTO.getOrderDTOList()
                 .stream()
                 .flatMap(orderDTO -> Mapper.purchaseDTOListIntoPurchaseList(orderDTO.getPurchaseList()).stream())
                 .flatMap(purchase -> productDAO.getAllProducts().stream()

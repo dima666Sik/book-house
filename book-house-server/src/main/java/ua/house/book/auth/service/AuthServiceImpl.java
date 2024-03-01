@@ -35,7 +35,7 @@ public class AuthServiceImpl implements AuthService {
     @Override
     @Transactional
     public AuthResponseDTO ordinalRegistration(RegistrationDTO accountDTORequest) {
-        Account user = Account.builder()
+        var user = Account.builder()
                 .email(accountDTORequest.getEmail())
                 .password(passwordEncoder.encode(accountDTORequest.getPassword()))
                 .nickname(accountDTORequest.getUsername())
@@ -51,7 +51,7 @@ public class AuthServiceImpl implements AuthService {
     @Override
     @Transactional
     public AuthResponseDTO adminRegistration(RegistrationDTO accountDTORequest) {
-        Account admin = Account.builder()
+        var admin = Account.builder()
                 .email(accountDTORequest.getEmail())
                 .password(passwordEncoder.encode(accountDTORequest.getPassword()))
                 .nickname(accountDTORequest.getUsername())

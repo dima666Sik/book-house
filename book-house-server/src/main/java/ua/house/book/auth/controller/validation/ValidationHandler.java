@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 public class ValidationHandler {
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<String> handleValidationExceptions(MethodArgumentNotValidException ex) {
-        StringBuilder errorMessage = new StringBuilder();
+        var errorMessage = new StringBuilder();
         ex.getBindingResult()
                 .getFieldErrors()
                 .forEach(error -> errorMessage.append(error.getDefaultMessage()).append("\n"));

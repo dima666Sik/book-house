@@ -13,7 +13,7 @@ import ua.house.book.auth.domain.entity.Account;
 @Entity
 @Table(name = "cards")
 @EqualsAndHashCode
-public class Cards {
+public class Card {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @EqualsAndHashCode.Exclude

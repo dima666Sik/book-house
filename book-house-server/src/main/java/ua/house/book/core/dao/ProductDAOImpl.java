@@ -43,7 +43,7 @@ public class ProductDAOImpl implements ProductDAO {
     @Transactional
     @Override
     public void deleteProduct(Long idProduct) {
-        Product product = currentSession().get(Product.class, idProduct);
+        var product = currentSession().get(Product.class, idProduct);
         currentSession().remove(product);
     }
 
@@ -56,7 +56,7 @@ public class ProductDAOImpl implements ProductDAO {
     @Transactional
     @Override
     public void saveAllProducts(List<Product> productList) {
-        for (Product product : productList) {
+        for (var product : productList) {
             currentSession().merge(product);
         }
     }

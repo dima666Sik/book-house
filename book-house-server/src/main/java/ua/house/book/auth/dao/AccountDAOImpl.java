@@ -30,12 +30,12 @@ public class AccountDAOImpl implements AccountDAO {
 
     @Override
     public Optional<Account> findUserAccountByEmailAndPassword(String email, String password) {
-        Account resultSearch = currentSession()
+        var resultSearch = currentSession()
                 .createQuery(AccountHQL.FIND_USER_BY_EMAIL_AND_PASSWORD, Account.class)
                 .setParameter("email", email)
                 .setParameter("password", password)
                 .uniqueResult();
-        Account resultSearchFull = currentSession()
+        var resultSearchFull = currentSession()
                 .createQuery(AccountHQL.FIND_ORDERS_FOR_ACCOUNT, Account.class)
                 .setParameter("account", resultSearch)
                 .uniqueResult();
@@ -44,12 +44,12 @@ public class AccountDAOImpl implements AccountDAO {
 
     @Override
     public Optional<Account> findAdminAccountByEmailAndPassword(String email, String password) {
-        Account resultSearch = currentSession()
+        var resultSearch = currentSession()
                 .createQuery(AccountHQL.FIND_ADMIN_BY_EMAIL_AND_PASSWORD, Account.class)
                 .setParameter("email", email)
                 .setParameter("password", password)
                 .uniqueResult();
-        Account resultSearchFull = currentSession()
+        var resultSearchFull = currentSession()
                 .createQuery(AccountHQL.FIND_ORDERS_FOR_ACCOUNT, Account.class)
                 .setParameter("account", resultSearch)
                 .uniqueResult();
@@ -58,11 +58,10 @@ public class AccountDAOImpl implements AccountDAO {
 
     @Override
     public Optional<Account> findAccountByEmail(String email) {
-        Account resultSearch = currentSession()
+        var resultSearch = currentSession()
                 .createQuery(AccountHQL.FIND_USER_BY_EMAIL, Account.class)
                 .setParameter("email", email)
                 .uniqueResult();
-        System.out.println(resultSearch);
         return Optional.ofNullable(resultSearch);
     }
 }

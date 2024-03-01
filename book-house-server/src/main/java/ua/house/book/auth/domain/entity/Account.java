@@ -6,7 +6,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import ua.house.book.auth.domain.Role;
 import ua.house.book.core.domain.entity.Order;
-import ua.house.book.creditcard.domain.entity.Cards;
+import ua.house.book.creditcard.domain.entity.Card;
 
 import java.util.Collection;
 import java.util.List;
@@ -46,7 +46,7 @@ public class Account implements UserDetails {
 
     @EqualsAndHashCode.Exclude
     @OneToOne(mappedBy = "account")
-    private Cards cards;
+    private Card card;
 
     @EqualsAndHashCode.Exclude
     @OneToMany(mappedBy = "account")

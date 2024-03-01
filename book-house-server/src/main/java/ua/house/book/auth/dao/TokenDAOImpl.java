@@ -25,7 +25,7 @@ public class TokenDAOImpl implements TokenDAO{
     }
     @Override
     public Optional<Token> findByToken(String token) {
-        Token accountToken = currentSession()
+        var accountToken = currentSession()
                 .createQuery(TokenHQL.FIND_BY_TOKEN, Token.class)
                 .setParameter("token", token)
                 .uniqueResult();
@@ -49,7 +49,7 @@ public class TokenDAOImpl implements TokenDAO{
     @Override
     @Transactional
     public void saveAllTokens(List<Token> validUserTokens) {
-        for (Token token : validUserTokens) {
+        for (var token : validUserTokens) {
             currentSession().merge(token);
         }
     }

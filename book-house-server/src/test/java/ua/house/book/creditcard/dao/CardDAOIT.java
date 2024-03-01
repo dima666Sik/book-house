@@ -14,12 +14,12 @@ import ua.house.book.auth.dao.AccountDAO;
 import ua.house.book.auth.domain.entity.Account;
 import ua.house.book.auth.exception.UserNotFoundException;
 import ua.house.book.core.exception.ProductNotFoundException;
-import ua.house.book.creditcard.domain.entity.Cards;
+import ua.house.book.creditcard.domain.entity.Card;
 
 @ExtendWith(SpringExtension.class)
 @ContextConfiguration(classes = {TestHibernateConfig.class, TestAuthConfig.class, TestCoreBeansConfig.class})
-@Sql(value = {"/src/test/resources/drop-test-credit-card-before.sql"}, executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
-class CardsDAOIT {
+@Sql(value = {"classpath:drop-test-credit-card-before.sql"}, executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
+class CardDAOIT {
     @Inject
     private CardDAO cardDAO;
     @Inject
@@ -27,7 +27,7 @@ class CardsDAOIT {
     @Inject
     private AccountDAO accountDAO;
     @Inject
-    private Cards cards;
+    private Card card;
 
     @Test
     void saveCard() {
@@ -41,12 +41,12 @@ class CardsDAOIT {
                     .orElseThrow(() -> new UserNotFoundException("Not found user by this email: " + userAccount.getEmail()));
         }
 
-        cardDAO.saveCard(cards);
+        cardDAO.saveCard(card);
         final Account finalAccount = account;
-        Cards cardsFound = cardDAO.getCard(account.getId())
-                .orElseThrow(() -> new ProductNotFoundException("Not found card with this user id: "
+        Card cardFound = cardDAO.getCard(account.getId())
+                                .orElseThrow(() -> new ProductNotFoundException("Not found card with this user id: "
                         + finalAccount.getId()));
-        System.out.println(cardsFound);
-        Assertions.assertEquals(cards, cardsFound);
+        System.out.println(cardFound);
+        Assertions.assertEquals(card, cardFound);
     }
 }

@@ -21,7 +21,7 @@ public class MoneyCards {
     private Integer spendLimit;
     @EqualsAndHashCode.Exclude
     @OneToOne(mappedBy = "moneyCards")
-    private Cards cards;
+    private Card card;
 
     @EqualsAndHashCode.Exclude
     @OneToOne(cascade = CascadeType.ALL)

@@ -18,7 +18,7 @@ import java.util.Map;
 import java.util.function.Function;
 
 @Service
-@PropertySource("src/main/resources/jwt.properties")
+@PropertySource("classpath:jwt.properties")
 public class JwtService {
     @Value("${jwt.secret.key}")
     private String secretKey;
